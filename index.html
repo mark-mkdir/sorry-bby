@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ดีกันน้าา 🥺</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe6e6; /* สีพื้นหลังชมพูอ่อน */
+            font-family: 'Kanit', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        .card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(255, 77, 77, 0.15);
+            max-width: 400px;
+            width: 85%;
+            z-index: 10;
+        }
+        h1 { 
+            color: #ff4d4d; 
+            margin-top: 0;
+        }
+        p { 
+            color: #555; 
+            line-height: 1.6; 
+            margin-bottom: 30px; 
+            font-size: 16px;
+        }
+        .buttons { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            align-items: center;
+            position: relative;
+            height: 50px;
+        }
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'Kanit', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn-yes { 
+            background-color: #ff4d4d; 
+            color: white; 
+            font-weight: 600; 
+            box-shadow: 0 4px 10px rgba(255, 77, 77, 0.3);
+        }
+        .btn-yes:hover { 
+            background-color: #ff1a1a; 
+            transform: scale(1.05); 
+        }
+        .btn-no { 
+            background-color: #e0e0e0; 
+            color: #555; 
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="main-card">
+        <h1>เค้าขอโทษน้าา 🥺</h1>
+        <p>ที่บอกว่าจะไปหาแต่ไม่ได้ไป เพราะน้องเขาเป็นห่วงเรื่องสอบไฟนอล เค้าไม่ได้ตั้งใจจะผิดสัญญานะ รู้ว่าทำให้ตัวเองน้อยใจ เค้าเสียใจมากๆ เลย<br><br>ให้อภัยเค้านะคับ 💖</p>
+        <div class="buttons">
+            <button class="btn-yes" onclick="forgiveMe()">ให้อภัย (ดีกัน!)</button>
+            <button class="btn-no" id="no-btn">ไม่ให้อภัย (งอนต่อ)</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('no-btn');
+        
+        // ทำให้ปุ่ม "ไม่ให้อภัย" หนีเมื่อเมาส์ชี้หรือนิ้วแตะ
+        const moveButton = (e) => {
+            // ป้องกันไม่ให้เผลอกดโดนตอนแตะบนมือถือ
+            if(e) e.preventDefault(); 
+
+            // คำนวณพื้นที่หน้าจอเพื่อไม่ให้ปุ่มหนีออกนอกจอ
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+            
+            const x = Math.max(10, Math.random() * maxX);
+            const y = Math.max(10, Math.random() * maxY);
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        };
+
+        // จับ Event ทั้งการใช้เมาส์ชี้ และนิ้วสัมผัสบนมือถือ
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', moveButton, { passive: false });
+
+        // เมื่อกดปุ่มให้อภัย
+        function forgiveMe() {
+            document.getElementById('main-card').innerHTML = `
+                <h1>เย้! ขอบคุณน้าา 🎉</h1>
+                <p>รักตัวเองที่สุดเลย ไว้เค้าจะรีบไปหาหลังไฟนอลนะ 💕</p>
+                <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXpncDJib2xsanpnYW1vMXlvcTlrNnVzOWRxc2xsa2h5OXBmZXh0MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/IzXiddo2twMmdmU8Lv/giphy.gif" alt="Cute Hug" style="border-radius:15px; margin-top:15px; max-width: 100%; width: 250px;">
+            `;
+        }
+    </script>
+</body>
+</html>
